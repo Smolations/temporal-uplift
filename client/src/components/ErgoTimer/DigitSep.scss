@@ -1,0 +1,6 @@
+.DigitSep {
+  &::before {
+    content: ':';
+    padding: 5px 10px;
+  }
+}
