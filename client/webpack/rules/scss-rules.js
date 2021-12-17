@@ -1,7 +1,4 @@
-const {
-  postCssLoader,
-  sassLoader,
-} = require('../loaders');
+const { sassLoader } = require('../loaders');
 
 module.exports = [
   {
@@ -14,7 +11,7 @@ module.exports = [
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 2,
+          importLoaders: 1,
           // not sure why some of these configs don't work, but it's
           // likely because sass-loader prioritizes file naming
           // over this config (i.e. 2 css-loader configs) in codesandbox
@@ -24,7 +21,6 @@ module.exports = [
         },
       },
       // autoprefix supported browserslist config
-      postCssLoader,
       // Compiles Sass to CSS
       sassLoader,
     ],
@@ -38,14 +34,13 @@ module.exports = [
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 2,
+          importLoaders: 1,
           // modules: true, // same as `modules.mode == 'local'`
           modules: {
             mode: 'local',
           },
         },
       },
-      postCssLoader,
       sassLoader,
     ],
   },

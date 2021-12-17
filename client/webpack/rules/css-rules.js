@@ -1,5 +1,3 @@
-const { postCssLoader } = require('../loaders');
-
 module.exports = [
   {
     test: /\.css$/,
@@ -15,7 +13,6 @@ module.exports = [
         //   // },
         // },
       },
-      postCssLoader,
     ],
   },
 ];

@@ -2,11 +2,6 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const {
-  postCssLoader,
-  sassLoader,
-} = require('./webpack/loaders');
-
-const {
   cssRules,
   scssRules,
 } = require('./webpack/rules');
