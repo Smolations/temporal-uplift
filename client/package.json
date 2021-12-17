@@ -1,5 +1,5 @@
 {
-  "name": "react-enterprise-starter",
+  "name": "temporal-uplift",
   "version": "1.0.0",
   "description": "React for power users. No CRA here. Do it all ya' self.",
   "keywords": [],
@@ -40,23 +40,15 @@
     "sass": "1.43.4",
     "sass-loader": "12.3.0",
     "style-loader": "3.3.1",
-    "ts-jest": "27.0.7",
     "webpack": "5.64.2",
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.5.0"
   },
   "devDependencies": {
     "@babel/eslint-plugin": "7.14.5",
-    "@babel/preset-typescript": "7.16.0",
     "@testing-library/jest-dom": "5.15.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
-    "@types/jest": "27.0.3",
-    "@types/react": "17.0.36",
-    "@types/react-dom": "17.0.11",
-    "@types/react-router-dom": "5.3.2",
-    "@typescript-eslint/eslint-plugin": "5.4.0",
-    "@typescript-eslint/parser": "5.4.0",
     "babel-jest": "27.3.1",
     "eslint": "8.3.0",
     "eslint-config-airbnb": "19.0.1",
@@ -68,7 +60,6 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-testing-library": "5.0.0",
     "jest": "27.3.1",
-    "jest-css-modules": "2.1.0",
-    "typescript": "4.5.2"
+    "jest-css-modules": "2.1.0"
   }
 }
