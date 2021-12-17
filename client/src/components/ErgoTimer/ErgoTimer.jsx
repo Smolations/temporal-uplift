@@ -23,77 +23,72 @@ Date.prototype.toTemporalInstant = toTemporalInstant;
 
 
 export default function ErgoTimer() {
+  console.groupCollapsed('[ErgoTimer]');
   // console.log('Initialization complete', Temporal.Now.instant().toString());
 
   const [isStopwatchStarted, setIsStopwatchStarted] = useState(false);
   const [startInstant, setStartInstant] = useState(null);
   const [stopwatchDuration, setStopwatchDuration] = useState(null);
+  const [stopwatchInterval, setStopwatchInterval] = useState(null);
   console.log('stopwatchDuration: %o', stopwatchDuration)
 
 
   function handleStartStopwatch() {
     console.log('handleStartStopwatch');
-    setIsStopwatchStarted(!isStopwatchStarted);
-    setStartInstant(null);
-  }
-
-
-  // every second, get current duration from a set point in time
-  // (the chosen time)
-  useEffect(() => {
-    let stopwatchInterval;
 
     if (isStopwatchStarted) {
-      if (!startInstant) {
-        // set start instant
-        const nowInEpoch = Temporal.Now.instant();
-        const newStartInstant = Temporal.Instant.from(nowInEpoch);
-        console.log('newStartInstant: ', newStartInstant);
-        setStartInstant(newStartInstant);
+      // intent is to STOP the stopwatch
+      setStartInstant(null);
+      setStopwatchDuration(null);
+      console.log('clearing interval')
+      setStopwatchInterval(clearInterval(stopwatchInterval));
+    } else {
+      // intent is to START the stopwatch
 
-        // get timer running
-        // set stopwatch time from new start instant
-        const duration = newStartInstant.since(newStartInstant);
-        console.log('duration: ', duration)
-        console.log('duration.toString(): ', duration.toString())
-        console.log('duration.hours: ', duration.hours)
-        setStopwatchDuration(duration);
+      // set start instant
+      const nowInEpoch = Temporal.Now.instant();
+      const newStartInstant = Temporal.Instant.from(nowInEpoch);
+      console.log('newStartInstant: ', newStartInstant);
+      setStartInstant(newStartInstant);
 
-        stopwatchInterval = setInterval(() => {
+      // get timer running
+      // set stopwatch time from new start instant
+      const duration = newStartInstant.since(newStartInstant);
+      console.log('duration: ', duration);
+      console.log('duration.toString(): ', duration.toString());
+      console.log('duration.hours: ', duration.hours);
+      setStopwatchDuration(duration);
+
+      setStopwatchInterval(
+        setInterval(() => {
+          console.groupCollapsed('[interval]');
           const newNowInEpoch = Temporal.Now.instant();
           const stopwatchElapsedDuration = newNowInEpoch.since(newStartInstant);
-          console.log('[interval] newNowInEpoch: %o', newNowInEpoch);
-          console.log('[interval] stopwatchElapsedDuration: %o', stopwatchElapsedDuration);
+          console.log('newNowInEpoch: %o', newNowInEpoch);
+          console.log('stopwatchElapsedDuration: %o', stopwatchElapsedDuration);
           setStopwatchDuration(stopwatchElapsedDuration);
-        }, 1000);
-      }
-    } else {
-      // just got turned off
-      // stop timer (preserve time?)
-      // set startInstant to null
+          console.groupEnd();
+        }, 1000),
+      );
     }
 
-    return () => {
-      // cleanup
-      console.log('effect cleanup');
-      if (!isStopwatchStarted) {
-        clearInterval(stopwatchInterval);
-      }
-    };
-  }, [isStopwatchStarted, startInstant])
+    setIsStopwatchStarted(!isStopwatchStarted);
+  }
+
 
   console.log('stopwatchDuration.round.seconds: %o', )
 
   const roundedStopwatchDuration = stopwatchDuration?.round({ largestUnit: 'days' });
 
-  const minutes = roundedStopwatchDuration ? `${roundedStopwatchDuration.minutes}`.padStart(2, '0') : '99';
+  const minutes = roundedStopwatchDuration ? `${roundedStopwatchDuration.minutes}`.padStart(2, '0') : '00';
   const [leadingHour, trailingHour] = minutes.split('');
-  console.log('minutes: %o', roundedStopwatchDuration?.minutes)
+  console.log('minutes: %o', roundedStopwatchDuration?.minutes);
 
-  const seconds = roundedStopwatchDuration ? `${roundedStopwatchDuration.seconds}`.padStart(2, '0') : '99';
+  const seconds = roundedStopwatchDuration ? `${roundedStopwatchDuration.seconds}`.padStart(2, '0') : '00';
   const [leadingMinute, trailingMinute] = seconds.split('');
   console.log('seconds: %o', stopwatchDuration?.seconds)
 
+  console.groupEnd();
   return (
     <div className="ErgoTimer">
       <Header as="h5" heading="Temporal Uplift" />
