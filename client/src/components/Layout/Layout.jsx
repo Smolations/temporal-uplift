@@ -31,12 +31,12 @@ export default function Layout(props) {
   const logo = logosByTheme[theme];
   const classes = classNames('Layout', className);
 
+  // heading={<img className="Layout--logo" alt="SmolaGaming logo" src={logo} />}
   return (
     <div className={classes}>
       <Header
         as="h1"
         className="Layout--Header"
-        heading={<img className="Layout--logo" alt="SmolaGaming logo" src={logo} />}
       >
         <Nav routes={routes} />
         {/* <DropdownNav /> */}

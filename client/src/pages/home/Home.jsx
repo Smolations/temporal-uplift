@@ -11,7 +11,6 @@ export default function Home(props) {
 
   return (
     <Page className="Home">
-      <Header as="h2" heading="Home" />
       <ErgoTimer />
     </Page>
   );
