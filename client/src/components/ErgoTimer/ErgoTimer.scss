@@ -1,0 +1,13 @@
+@use 'sass/vars';
+
+.ErgoTimer {
+  box-sizing: padding-box;
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: vars.$color-reentry-orange;
+}
