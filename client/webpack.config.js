@@ -32,7 +32,7 @@ module.exports = {
   //   filename: '[name].js',  // default
   // },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx'],
     // modules: [
     //   path.join(__dirname, 'src'),
     //   'node_modules',

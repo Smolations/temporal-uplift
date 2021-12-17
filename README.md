@@ -1,5 +1,5 @@
-# react-enterprise-starter
-This project is meant as a demonstration tool aimed at junior react devs who may be interested in patterns used for enterprise-level frontends
+# Temporal Uplift
+This is an ElectronJS app built on React. It is a stand-up/sit-down timer. But maybe with super powers.
 
 ## Spinning up the app:
 
@@ -9,4 +9,4 @@ This project is meant as a demonstration tool aimed at junior react devs who may
 ```
 $ docker-compose up
 ```
-4. Visit http://localhost:8080 for the site and https://localhost:6006 for Storybook.
+4. Visit http://localhost:8080 for the app.

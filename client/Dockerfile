@@ -1,4 +1,4 @@
-# docker build -t res-client:next .
+# docker build -t tu-client:next .
 FROM node:16-slim AS os
 
 LABEL version="1.0"
@@ -17,18 +17,11 @@ RUN apt update -y && \
   apt install -y $APT_PACKAGES && \
   npm install -g $NPM_PACKAGES && \
   npm install && \
-
-  # why is yeoman so lame?
-  #sed -i -e '/rootCheck/d' '/usr/local/lib/node_modules/yo/lib/cli.js' && \
-  # sed -i -e '/rootCheck/d' '/usr/src/app/node_modules/yo/lib/cli.js' && \
-
   npm cache clean --force && \
   apt autoremove -y
 
-#ENV PATH /usr/src/app/node_modules/.bin:$PATH
-
 COPY . ./
 
-EXPOSE 8080 6006
+EXPOSE 8080
 
 CMD ["npm", "start"]
