@@ -3,7 +3,6 @@ import { useRoutes } from 'react-router-dom';
 
 import { Layout } from 'components/Layout';
 
-import { ErgoTimerPage } from './ergo-timer';
 import { Home } from './home';
 import { Theming } from './theming';
 
@@ -22,14 +21,10 @@ export const routes = [
         element: <Home />,
       },
       {
+        nav: false,
         name: 'Theming',
         path: '/theming',
         element: <Theming />,
-      },
-      {
-        name: 'ErgoTimer',
-        path: '/ergo-timer',
-        element: <ErgoTimerPage />,
       },
     ],
   },
