@@ -72,6 +72,13 @@ module.exports = {
         type: "asset",
       },
       {
+        test: /\.ejs$/,
+        loader: 'ejs-loader',
+        options: {
+          esModule: false,
+        },
+      },
+      {
         test: /\.html$/,
         use: [
           {
@@ -95,11 +102,10 @@ module.exports = {
     // port: 8080, // default
   },
   plugins: [
-    new HtmlWebPackPlugin(),
-    // new HtmlWebPackPlugin({
-    //   title: 'SmolaGaming: React Enterprise Starter',
-    //   template: './src/index.html',
-    //   filename: 'dist/index.html',
-    // }),
+    // new HtmlWebPackPlugin(),
+    new HtmlWebPackPlugin({
+      title: 'Temporal Uplift',
+      template: './src/index.ejs',
+    }),
   ],
 };

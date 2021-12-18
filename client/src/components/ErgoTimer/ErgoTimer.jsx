@@ -5,6 +5,7 @@ import {
   Intl,
   toTemporalInstant,
 } from '@js-temporal/polyfill';
+window.Temporal = Temporal;
 
 import { Button } from '../Button';
 import { Header } from '../Header';
@@ -22,51 +23,93 @@ Digit.Sep = DigitSep;
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 
+function getZeroDuration() {
+  return Temporal.Duration.from({ minutes: 0 });
+}
+
+
 export default function ErgoTimer() {
   console.groupCollapsed('[ErgoTimer]');
   // console.log('Initialization complete', Temporal.Now.instant().toString());
 
   const [isStopwatchStarted, setIsStopwatchStarted] = useState(false);
   const [startInstant, setStartInstant] = useState(null);
-  const [stopwatchDuration, setStopwatchDuration] = useState(null);
+  const [currentStopwatchDuration, setCurrentStopwatchDuration] = useState(getZeroDuration());
+  const [elapsedStopwatchDuration, setElapsedStopwatchDuration] = useState(getZeroDuration());
   const [stopwatchInterval, setStopwatchInterval] = useState(null);
-  console.log('stopwatchDuration: %o', stopwatchDuration)
+  console.log('currentStopwatchDuration: %o', currentStopwatchDuration);
+  console.log('elapsedStopwatchDuration: %o', elapsedStopwatchDuration);
+  console.log('startInstant: %o', startInstant?.toString());
 
 
-  function handleStartStopwatch() {
-    console.log('handleStartStopwatch');
+
+  function resetTimer() {
+    console.log('[resetTimer]');
+    setStartInstant(null);
+    setElapsedStopwatchDuration(getZeroDuration());
+    setCurrentStopwatchDuration(getZeroDuration());
+    stopTimer();
+  }
+
+  function stopTimer() {
+    setStopwatchInterval(clearInterval(stopwatchInterval));
+    setCurrentStopwatchDuration(elapsedStopwatchDuration);
+  }
+
+
+  function handleResetStopwatch() {
+    resetTimer();
+  }
+
+  function handleStartStopStopwatch() {
+    console.log('handleStartStopStopwatch');
 
     if (isStopwatchStarted) {
       // intent is to STOP the stopwatch
-      setStartInstant(null);
-      setStopwatchDuration(null);
-      console.log('clearing interval')
-      setStopwatchInterval(clearInterval(stopwatchInterval));
+      console.log('clearing interval');
+      stopTimer();
     } else {
       // intent is to START the stopwatch
 
       // set start instant
-      const nowInEpoch = Temporal.Now.instant();
-      const newStartInstant = Temporal.Instant.from(nowInEpoch);
-      console.log('newStartInstant: ', newStartInstant);
-      setStartInstant(newStartInstant);
+      const nowInstant = Temporal.Now.instant();
+      console.log('nowInstant: %o', nowInstant);
+
+      let currentStartInstant;
+      let duration;
+
+
+      if (startInstant) {
+        // restarting timer
+        console.log('restarting timer');
+        currentStartInstant = startInstant;
+        duration = currentStopwatchDuration;
+      } else {
+        // starting timer from zero
+        console.log('starting timer from zero');
+        currentStartInstant = nowInstant;
+        duration = getZeroDuration();
+      }
+
+      console.log('setting startInstant: ', currentStartInstant);
+      setStartInstant(currentStartInstant);
 
       // get timer running
       // set stopwatch time from new start instant
-      const duration = newStartInstant.since(newStartInstant);
+      // need start + duration for starting back up?
       console.log('duration: ', duration);
       console.log('duration.toString(): ', duration.toString());
       console.log('duration.hours: ', duration.hours);
-      setStopwatchDuration(duration);
+      setCurrentStopwatchDuration(duration);
 
       setStopwatchInterval(
         setInterval(() => {
           console.groupCollapsed('[interval]');
-          const newNowInEpoch = Temporal.Now.instant();
-          const stopwatchElapsedDuration = newNowInEpoch.since(newStartInstant);
-          console.log('newNowInEpoch: %o', newNowInEpoch);
+          const newNowInstant = Temporal.Now.instant();
+          const stopwatchElapsedDuration = elapsedStopwatchDuration.add(currentStopwatchDuration);
+          console.log('newNowInstant: %o', newNowInstant);
           console.log('stopwatchElapsedDuration: %o', stopwatchElapsedDuration);
-          setStopwatchDuration(stopwatchElapsedDuration);
+          setCurrentStopwatchDuration(stopwatchElapsedDuration);
           console.groupEnd();
         }, 1000),
       );
@@ -76,9 +119,9 @@ export default function ErgoTimer() {
   }
 
 
-  console.log('stopwatchDuration.round.seconds: %o', )
+  console.log('stopwatchDuration.round.seconds: %o',);
 
-  const roundedStopwatchDuration = stopwatchDuration?.round({ largestUnit: 'days' });
+  const roundedStopwatchDuration = elapsedStopwatchDuration?.add(currentStopwatchDuration)?.round({ largestUnit: 'days' });
 
   const minutes = roundedStopwatchDuration ? `${roundedStopwatchDuration.minutes}`.padStart(2, '0') : '00';
   const [leadingHour, trailingHour] = minutes.split('');
@@ -86,7 +129,7 @@ export default function ErgoTimer() {
 
   const seconds = roundedStopwatchDuration ? `${roundedStopwatchDuration.seconds}`.padStart(2, '0') : '00';
   const [leadingMinute, trailingMinute] = seconds.split('');
-  console.log('seconds: %o', stopwatchDuration?.seconds)
+  console.log('seconds: %o', roundedStopwatchDuration?.seconds);
 
   console.groupEnd();
   return (
@@ -103,7 +146,8 @@ export default function ErgoTimer() {
             <Digit>{leadingMinute}</Digit>
             <Digit>{trailingMinute}</Digit>
           </div>
-          <Button onClick={handleStartStopwatch}>Start/Stop</Button>
+          <Button onClick={handleStartStopStopwatch}>Start/Stop</Button>
+          <Button onClick={handleResetStopwatch}>Reset</Button>
         </div>
       </div>
     </div>
