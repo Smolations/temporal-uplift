@@ -10,5 +10,5 @@ export default function Digit(props) {
     <span className="Digit">
       {children}
     </span>
-  )
+  );
 }

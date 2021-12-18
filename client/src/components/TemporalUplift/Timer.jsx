@@ -15,7 +15,6 @@ function getZeroDuration() {
 
 export default function Timer() {
   console.groupCollapsed('[Timer]');
-  // console.log('Initialization complete', Temporal.Now.instant().toString());
 
   const [timerDuration, setTimerDuration] = useState(getZeroDuration());
   const [timerInterval, setTimerInterval] = useState(null);

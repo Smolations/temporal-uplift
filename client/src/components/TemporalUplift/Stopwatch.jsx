@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 
 import { Button } from '../Button';
-import { Header } from '../Header';
 
-import { Digit } from '../Digit';
+import { Time } from '../Time';
 
 import './Stopwatch.scss';
 
@@ -51,26 +50,16 @@ export default function Stopwatch() {
 
   const roundedStopwatchDuration = timerDuration?.round({ largestUnit: 'days' });
 
-  const minutes = roundedStopwatchDuration ? `${roundedStopwatchDuration.minutes}`.padStart(2, '0') : '00';
-  const [leadingHour, trailingHour] = minutes.split('');
-  console.log('minutes: %o', roundedStopwatchDuration?.minutes);
-
-  const seconds = roundedStopwatchDuration ? `${roundedStopwatchDuration.seconds}`.padStart(2, '0') : '00';
-  const [leadingMinute, trailingMinute] = seconds.split('');
-  console.log('seconds: %o', roundedStopwatchDuration?.seconds);
-
   console.groupEnd();
   return (
     <div className="Stopwatch">
       <h6>Stopwatch</h6>
       <div className="Stopwatch--stopwatch-container">
-        <div className="Stopwatch--the-timer-container">
-          <Digit>{leadingHour}</Digit>
-          <Digit>{trailingHour}</Digit>
-          <Digit.Sep />
-          <Digit>{leadingMinute}</Digit>
-          <Digit>{trailingMinute}</Digit>
-        </div>
+        <Time
+          hours={roundedStopwatchDuration?.hours}
+          minutes={roundedStopwatchDuration?.minutes}
+          seconds={roundedStopwatchDuration?.seconds}
+        />
         <Button onClick={handleStartStopwatch}>Start</Button>
         <Button onClick={handleStopStopwatch}>Stop</Button>
         <Button onClick={handleResetStopwatch}>Reset</Button>
