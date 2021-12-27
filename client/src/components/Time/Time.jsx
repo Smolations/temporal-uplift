@@ -2,48 +2,40 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 
-import { Digit } from '../Digit';
+import { DigitPair } from '../Digit';
 
 import './Time.scss';
 
+console.log('[Time] attaching Temporal to window..')
+window.Temporal ||= Temporal;
 
+
+/**
+ * The purpose of this component is _only_ to display a time that has been
+ * provided to it.
+ */
 export default function Time(props) {
+  console.groupCollapsed('[Time]');
   const {
     hours,
     minutes,
     seconds,
+    temporal,
   } = props;
+  console.log('props: %o', props)
 
-  const plainTime = Temporal.PlainTime.from({
-    hour: parseInt(hours, 10),
-    minute: parseInt(minutes, 10),
-    second: parseInt(seconds, 10),
-  });
-  console.log('plainTime: %o', plainTime)
+  const hour =  temporal?.hour || hours;
+  const minute =  temporal?.minute || minutes;
+  const second =  temporal?.second || seconds;
 
-  const newHours = `${plainTime.hour}`.padStart(2, '0');
-  const [leadingHour, trailingHour] = newHours.split('');
-  console.log('[Time] hours: %o', newHours);
-
-  const newMinutes = `${plainTime.minute}`.padStart(2, '0');
-  const [leadingMinute, trailingMinute] = newMinutes.split('');
-  console.log('[Time] minutes: %o', newMinutes);
-
-  const newSeconds = `${plainTime.second}`.padStart(2, '0');
-  const [leadingSecond, trailingSecond] = newSeconds.split('');
-  console.log('[Time] seconds: %o', newSeconds);
-
-
+  console.groupEnd();
   return (
     <div className="Time">
-      <Digit>{leadingHour}</Digit>
-      <Digit>{trailingHour}</Digit>
-      <Digit.Sep />
-      <Digit>{leadingMinute}</Digit>
-      <Digit>{trailingMinute}</Digit>
-      <Digit.Sep />
-      <Digit>{leadingSecond}</Digit>
-      <Digit>{trailingSecond}</Digit>
+      <DigitPair value={hour} />
+      <DigitPair.Sep />
+      <DigitPair value={minute} />
+      <DigitPair.Sep />
+      <DigitPair value={second} />
     </div>
   );
 }
@@ -62,6 +54,11 @@ Time.propTypes = {
   seconds: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+  ]),
+  temporal: PropTypes.oneOfType([
+    PropTypes.instanceOf(Temporal.PlainTime),
+    PropTypes.instanceOf(Temporal.PlainDateTime),
+    PropTypes.instanceOf(Temporal.ZonedDateTime),
   ]),
 };
 

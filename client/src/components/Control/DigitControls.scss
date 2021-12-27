@@ -1,0 +1,10 @@
+.DigitControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // flip that frown upside down
+  .DigitControl:last-child {
+    transform: rotate(180deg);
+  }
+}
