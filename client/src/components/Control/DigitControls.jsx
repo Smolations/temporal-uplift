@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { Digit } from '../Digit';
@@ -9,36 +10,55 @@ import './DigitControls.scss';
 
 export default function DigitControls(props) {
   const {
+    children,
     defaultValue,
     max,
     min,
     onChange,
   } = props;
 
-  const [digit, setDigit] = useState(Number(defaultValue));
+  const isControlled = (children !== undefined);
+
+  // only if not controlled..
+  const [digit, setDigit] = useState(Number(children || defaultValue));
+
 
 
   function handleIncrease() {
-    setDigit((prevDigit) => {
-      const newDigit = (prevDigit === max) ? min : prevDigit + 1;
+    const nextDigitFrom = (cur) => (cur === max ? min : cur + 1);
+
+    if (isControlled) {
+      const newDigit = nextDigitFrom(children);
       onChange?.(newDigit);
-      return newDigit;
-    });
+    } else {
+      setDigit((prevDigit) => {
+        const newDigit = nextDigitFrom(prevDigit);
+        onChange?.(newDigit);
+        return newDigit;
+      });
+    }
   }
 
   function handleDecrease() {
-    setDigit((prevDigit) => {
-      const newDigit = (prevDigit === min) ? max : prevDigit - 1;
+    const nextDigitFrom = (cur) => (cur === min ? max : cur - 1);
+
+    if (isControlled) {
+      const newDigit = nextDigitFrom(children);
       onChange?.(newDigit);
-      return newDigit;
-    });
+    } else {
+      setDigit((prevDigit) => {
+        const newDigit = nextDigitFrom(prevDigit);
+        onChange?.(newDigit);
+        return newDigit;
+      });
+    }
   }
 
 
   return (
     <span className="DigitControls">
       <DigitControl onClick={handleIncrease} />
-      <Digit>{digit}</Digit>
+      <Digit>{isControlled ? children : digit}</Digit>
       <DigitControl onClick={handleDecrease} />
     </span>
   );
@@ -46,7 +66,12 @@ export default function DigitControls(props) {
 
 DigitControls.displayName = 'DigitControls';
 
-DigitControls.propTypes = {};
+DigitControls.propTypes = {
+  children: PropTypes.number,
+  max: PropTypes.number,
+  min: PropTypes.number,
+  onChange: PropTypes.func,
+};
 
 DigitControls.defaultProps = {
   defaultValue: 0,

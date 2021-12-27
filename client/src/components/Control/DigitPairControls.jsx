@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import DigitControls from './DigitControls';
@@ -5,39 +6,85 @@ import DigitControls from './DigitControls';
 import './DigitPairControls.scss';
 
 
+// yet another component that will be passing around
+// number couples to represent digits
 export default function DigitPairControls(props) {
-  const { onChange } = props;
+  console.groupCollapsed('[DigitPairControls]');
+  const {
+    children,
+    defaultDigits,
+    max,
+    onChange,
+  } = props;
 
-  const [digits, setDigits] = useState('00'); // sensible default?
-  console.log('[DigitPairControls] digits: %o', digits)
+  const [digits, setDigits] = useState(defaultDigits);
+  console.log('digits: %o', digits)
+
+  // time for a utility method yet?
+  const [maxLeadingDigit, maxTrailingDigit] = `${max}`.padStart('0', 2).split('').map(Number);
+  console.log('maxLeading(%o)/maxTrailing(%o)', maxLeadingDigit, maxTrailingDigit)
+
 
   function handleLeadingDigitChange(digit) {
     console.log('[DigitPairControls handleLeadingDigitChange] digit: %o', digit);
-    setDigits((digits) => {
-      const [leadingDigit, trailingDigit] = digits.split('');
-      const newDigits = `${digit}${trailingDigit}`;
+    setDigits((prevDigits) => {
+      const newDigits = [...prevDigits];
+      newDigits[0] = Number(digit);
 
-      onChange?.([digit, Number(trailingDigit)]);
+      if (parseInt(newDigits.join(''), 10) > max) {
+        console.log('[DigitPairControls handleLeadingDigitChange] max hit')
+        return prevDigits;
+      }
+
+      onChange?.(newDigits);
       return newDigits;
     });
   }
 
   function handleTrailingDigitChange(digit) {
     console.log('[DigitPairControls handleTrailingDigitChange] digit: %o', digit);
-    setDigits((digits) => {
-      const [leadingDigit, trailingDigit] = digits.split('');
-      const newDigits = `${leadingDigit}${digit}`;
+    setDigits((prevDigits) => {
+      const newDigits = [...prevDigits];
+      newDigits[1] = digit;
 
-      onChange?.([Number(leadingDigit), digit]);
+      onChange?.(newDigits);
       return newDigits;
     });
   }
 
 
+  console.groupEnd();
   return (
     <span className="DigitPairControls">
-      <DigitControls onChange={handleLeadingDigitChange} />
-      <DigitControls onChange={handleTrailingDigitChange} />
+      <DigitControls
+        max={maxLeadingDigit}
+        defaultDigit={0}
+        onChange={handleLeadingDigitChange}
+      >
+        {digits[0]}
+      </DigitControls>
+      <DigitControls
+        max={digits[0] === maxLeadingDigit ? maxTrailingDigit : 9}
+        defaultDigit={0}
+        onChange={handleTrailingDigitChange}
+      >
+        {digits[1]}
+      </DigitControls>
     </span>
   );
 }
+
+DigitPairControls.displayName = 'DigitPairControls';
+
+DigitPairControls.propTypes = {
+  /**
+   * To control this component, pass values as children. It should
+   * be a 2-element array of single-digit numbers.
+   */
+  children: PropTypes.arrayOf(PropTypes.number),
+};
+
+DigitPairControls.defaultProps = {
+  defaultDigits: [0, 0],
+  max: 99,
+};

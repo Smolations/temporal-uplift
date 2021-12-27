@@ -12,6 +12,7 @@ import './TimeControls.scss';
 
 
 export default function TimeControls(props) {
+  console.groupCollapsed('[TimeControls]');
   const {
     onChange,
     reverse,
@@ -25,8 +26,8 @@ export default function TimeControls(props) {
   // days, weeks, etc. numbers, the units get larger deeper
   // into the array. i.e.:
   //  [seconds, minutes, hours]
-  const [timeArray, setTimeArray] = useState([0, 0, 0]); // check incoming time?
-  console.log('[TimeControls] timeArray: %o', timeArray)
+  const [timeArray, setTimeArray] = useState([3, 2, 1]); // check incoming time?
+  console.log('timeArray: %o', timeArray)
 
   const classes = classNames('TimeControls', {
     'TimeControls--single': single,
@@ -42,6 +43,7 @@ export default function TimeControls(props) {
     setTimeArray((prevTimeArray) => {
       const newTimeArray = [...prevTimeArray];
       newTimeArray[ndx] = Number(digits.join(''));
+
       onChange?.(newTimeArray);
       return newTimeArray;
     });
@@ -49,15 +51,21 @@ export default function TimeControls(props) {
     console.groupEnd();
   }
 
+  console.groupEnd();
   return (
     <div className={classes}>
       {timeArray.map((timeDigits, ndx) => {
-        const timeArrayNdx = (timeArray.length - 1) - ndx;
+        const CAP = 59;
+        const isNotSeconds = (ndx > 0);
+        const isCapped = (ndx < 2); // seconds/minutes
+        const max = isCapped ? CAP : undefined;
+
         return (
           <React.Fragment key={`.${ndx}`}>
-            {ndx > 0 && (<Digit.Sep />)}
+            {isNotSeconds && (<Digit.Sep />)}
             <DigitPairControls
-              onChange={(digits) => handleChange(digits, timeArrayNdx)}
+              onChange={(digits) => handleChange(digits, ndx)}
+              max={max}
             />
           </React.Fragment>
         );

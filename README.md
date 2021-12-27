@@ -1,6 +1,8 @@
 # Temporal Uplift
 This is an ElectronJS app built on React. It is a stand-up/sit-down timer. But maybe with super powers.
 
+**VERY MUCH UNDER CONSTRUCTION**
+
 ## Spinning up the app:
 
 1. Make sure you install [Docker Desktop](https://www.docker.com/products/docker-desktop).
