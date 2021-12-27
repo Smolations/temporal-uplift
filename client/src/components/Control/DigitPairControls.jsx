@@ -21,7 +21,7 @@ export default function DigitPairControls(props) {
   console.log('digits: %o', digits)
 
   // time for a utility method yet?
-  const [maxLeadingDigit, maxTrailingDigit] = `${max}`.padStart('0', 2).split('').map(Number);
+  const [maxLeadingDigit, maxTrailingDigit] = `${max}`.padStart(2, '0').split('').map(Number);
   console.log('maxLeading(%o)/maxTrailing(%o)', maxLeadingDigit, maxTrailingDigit)
 
 

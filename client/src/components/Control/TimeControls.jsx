@@ -11,6 +11,10 @@ import DigitPairControls from './DigitPairControls';
 import './TimeControls.scss';
 
 
+function digitPairFrom(digit) {
+  return `${digit}`.padStart(2, '0').split('').slice(0, 2).map(Number);
+}
+
 export default function TimeControls(props) {
   console.groupCollapsed('[TimeControls]');
   const {
@@ -64,6 +68,7 @@ export default function TimeControls(props) {
           <React.Fragment key={`.${ndx}`}>
             {isNotSeconds && (<Digit.Sep />)}
             <DigitPairControls
+              defaultDigits={digitPairFrom(timeDigits)}
               onChange={(digits) => handleChange(digits, ndx)}
               max={max}
             />
