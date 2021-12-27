@@ -14,7 +14,7 @@ $page-width:  640px;
   overflow: auto;
 
   .Layout--Header {
-    display: flex;
+    // display: flex;
     display: none;
     padding: vars.$spacing-padding-huge calc((100% - #{$page-width}) / 2);
     background-color: vars.$theme-primary;

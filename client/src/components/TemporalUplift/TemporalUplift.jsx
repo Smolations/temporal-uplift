@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Header } from '../Header';
 
 import Stopwatch from './Stopwatch';
-// import Timer from './Timer';
+import Timer from './Timer';
 
 import './TemporalUplift.scss';
 
@@ -19,7 +19,7 @@ export default function TemporalUplift() {
       <Header as="h5" heading="Temporal Uplift" />
 
       <Stopwatch />
-      {/* <Timer /> */}
+      <Timer />
     </div>
   );
 }

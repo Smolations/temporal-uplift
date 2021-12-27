@@ -3,40 +3,72 @@ import React, { useEffect, useState } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 
 import { Button } from '../Button';
-import { Header } from '../Header';
+
+import { Time } from '../Time';
 
 import './Timer.scss';
 
 
-function getZeroDuration() {
-  return Temporal.Duration.from({ seconds: 0 });
+// @param {string} time  To start, expect hh:mm:ss format
+function getTimerDuration(time = '00:00:00') {
+  const [
+    hours,
+    minutes,
+    seconds,
+  ] = time.split(':');
+
+  return Temporal.Duration.from({
+    hours: parseInt(hours, 10),
+    minutes: parseInt(minutes, 10),
+    seconds: parseInt(seconds, 10),
+  });
 }
 
 
 export default function Timer() {
   console.groupCollapsed('[Timer]');
+  // console.log('Initialization complete', Temporal.Now.instant().toString());
 
-  const [timerDuration, setTimerDuration] = useState(getZeroDuration());
+  const [timerDuration, setTimerDuration] = useState(getTimerDuration());
   const [timerInterval, setTimerInterval] = useState(null);
-  // console.log('startInstant: %o', startInstant?.toString());
+  console.log('timerDuration: %o', timerDuration?.toString());
+
+
+  function isTimerZero() {
+    console.log('[isTimerZero] timerDuration(%o).blank: %o', timerDuration.toString(), timerDuration.blank)
+    const isAtZero = !Math.max(
+      timerDuration.hours,
+      timerDuration.minutes,
+      timerDuration.seconds,
+    );
+    isAtZero
+      ? console.log('[isTimerZero] YES')
+      : console.log('[isTimerZero] no');
+    return isAtZero;
+  }
 
 
   function handleResetTimer() {
+    const initialTime = prompt('Enter time:', '00:00:00');
     clearInterval(timerInterval);
-    setTimerDuration(getZeroDuration());
+    setTimerDuration(getTimerDuration(initialTime));
   }
 
   function handleStartTimer() {
     console.log('handleStartStopTimer');
-    // start interval
-    setTimerInterval(
-      setInterval(() => {
-        console.log('interval');
-        setTimerDuration((duration) => (
-          duration.add(Temporal.Duration.from({ seconds: 1 }))
-        ));
-      }, 1000),
-    );
+    if (isTimerZero()) {
+      console.log('timer at zero, BAILING');
+      return;
+    }
+
+    const newInterval = setInterval(() => {
+      console.log('[inside interval]');
+      setTimerDuration((duration) => (
+        duration.subtract(getTimerDuration('00:00:01'))
+      ));
+    }, 1000);
+
+    setTimerInterval(newInterval);
   }
 
   function handleStopTimer() {
@@ -46,28 +78,32 @@ export default function Timer() {
   }
 
 
+  // cleanup interval when component unmounts
+  useEffect(() => {
+    return () => clearInterval(timerInterval);
+  }, []);
+
+  useEffect(() => {
+    console.log('[useEffect timer duration/interval]')
+    if (timerDuration?.blank) {
+      console.log('[useEffect timer duration/interval] CLEARING INTERVAL')
+      clearInterval(timerInterval);
+    }
+  }, [timerDuration, timerInterval]);
+
+
   const roundedTimerDuration = timerDuration?.round({ largestUnit: 'days' });
-
-  const minutes = roundedTimerDuration ? `${roundedTimerDuration.minutes}`.padStart(2, '0') : '00';
-  const [leadingHour, trailingHour] = minutes.split('');
-  console.log('minutes: %o', roundedTimerDuration?.minutes);
-
-  const seconds = roundedTimerDuration ? `${roundedTimerDuration.seconds}`.padStart(2, '0') : '00';
-  const [leadingMinute, trailingMinute] = seconds.split('');
-  console.log('seconds: %o', roundedTimerDuration?.seconds);
 
   console.groupEnd();
   return (
     <div className="Timer">
       <h6>Timer</h6>
       <div className="Timer--timer-container">
-        <div className="Timer--the-timer-container">
-          <Digit>{leadingHour}</Digit>
-          <Digit>{trailingHour}</Digit>
-          <Digit.Sep />
-          <Digit>{leadingMinute}</Digit>
-          <Digit>{trailingMinute}</Digit>
-        </div>
+        <Time
+          hours={roundedTimerDuration?.hours}
+          minutes={roundedTimerDuration?.minutes}
+          seconds={roundedTimerDuration?.seconds}
+        />
         <Button onClick={handleStartTimer}>Start</Button>
         <Button onClick={handleStopTimer}>Stop</Button>
         <Button onClick={handleResetTimer}>Reset</Button>

@@ -8,11 +8,5 @@
   .Stopwatch--stopwatch-container {
     display: flex;
     align-items: center;
-
-    .Stopwatch--the-timer-container {
-      flex: 1 0;
-      font-weight: vars.$font-weight-boldest;
-      background-color: vars.$color-reentry-orange-light;
-    }
   }
 }
