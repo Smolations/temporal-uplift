@@ -12,18 +12,26 @@ export default function DigitControls(props) {
     defaultValue,
     max,
     min,
-    onClick,
+    onChange,
   } = props;
 
   const [digit, setDigit] = useState(Number(defaultValue));
 
 
   function handleIncrease() {
-    setDigit((prevDigit) => prevDigit === 9 ? 0 : prevDigit + 1);
+    setDigit((prevDigit) => {
+      const newDigit = (prevDigit === max) ? min : prevDigit + 1;
+      onChange?.(newDigit);
+      return newDigit;
+    });
   }
 
   function handleDecrease() {
-    setDigit((prevDigit) => prevDigit === 0 ? 9 : prevDigit - 1);
+    setDigit((prevDigit) => {
+      const newDigit = (prevDigit === min) ? max : prevDigit - 1;
+      onChange?.(newDigit);
+      return newDigit;
+    });
   }
 
 
