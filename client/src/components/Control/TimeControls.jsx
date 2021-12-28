@@ -5,7 +5,7 @@ import { Temporal } from '@js-temporal/polyfill';
 import { Digit } from '../Digit';
 import { Time } from '../Time';
 
-import DigitPairControls from './DigitPairControls';
+import DigitPairControl from './DigitPairControl';
 
 import './TimeControls.scss';
 
@@ -66,7 +66,7 @@ export default function TimeControls(props) {
         return (
           <React.Fragment key={`.${ndx}`}>
             {isNotSeconds && (<Digit.Sep />)}
-            <DigitPairControls
+            <DigitPairControl
               defaultDigits={digitPairFrom(timeDigits)}
               onChange={(digits) => handleChange(digits, ndx)}
               max={max}

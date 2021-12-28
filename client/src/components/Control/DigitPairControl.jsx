@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 
 import DigitControl from './DigitControl';
 
-import './DigitPairControls.scss';
+import './DigitPairControl.scss';
 
 
 // yet another component that will be passing around
 // number couples to represent digits
-export default function DigitPairControls(props) {
-  console.groupCollapsed('[DigitPairControls]');
+export default function DigitPairControl(props) {
+  console.groupCollapsed('[DigitPairControl]');
   const {
     children,
     defaultDigits,
@@ -26,13 +26,13 @@ export default function DigitPairControls(props) {
 
 
   function handleLeadingDigitChange(digit) {
-    console.log('[DigitPairControls handleLeadingDigitChange] digit: %o', digit);
+    console.log('[DigitPairControl handleLeadingDigitChange] digit: %o', digit);
     setDigits((prevDigits) => {
       const newDigits = [...prevDigits];
       newDigits[0] = Number(digit);
 
       if (parseInt(newDigits.join(''), 10) > max) {
-        console.log('[DigitPairControls handleLeadingDigitChange] max hit')
+        console.log('[DigitPairControl handleLeadingDigitChange] max hit')
         return prevDigits;
       }
 
@@ -42,7 +42,7 @@ export default function DigitPairControls(props) {
   }
 
   function handleTrailingDigitChange(digit) {
-    console.log('[DigitPairControls handleTrailingDigitChange] digit: %o', digit);
+    console.log('[DigitPairControl handleTrailingDigitChange] digit: %o', digit);
     setDigits((prevDigits) => {
       const newDigits = [...prevDigits];
       newDigits[1] = digit;
@@ -55,7 +55,7 @@ export default function DigitPairControls(props) {
 
   console.groupEnd();
   return (
-    <span className="DigitPairControls">
+    <span className="DigitPairControl">
       <DigitControl
         max={maxLeadingDigit}
         defaultDigit={0}
@@ -74,9 +74,9 @@ export default function DigitPairControls(props) {
   );
 }
 
-DigitPairControls.displayName = 'DigitPairControls';
+DigitPairControl.displayName = 'DigitPairControl';
 
-DigitPairControls.propTypes = {
+DigitPairControl.propTypes = {
   /**
    * To control this component, pass values as children. It should
    * be a 2-element array of single-digit numbers.
@@ -84,7 +84,7 @@ DigitPairControls.propTypes = {
   children: PropTypes.arrayOf(PropTypes.number),
 };
 
-DigitPairControls.defaultProps = {
+DigitPairControl.defaultProps = {
   defaultDigits: [0, 0],
   max: 99,
 };
