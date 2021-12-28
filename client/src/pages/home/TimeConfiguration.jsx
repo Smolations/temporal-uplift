@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TimeControl } from '../Control';
+import { TimeControl } from 'components/Control';
 
 import './TimeConfiguration.scss';
 

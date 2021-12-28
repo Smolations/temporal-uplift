@@ -50,9 +50,6 @@ export default function TimerControl() {
       timerDuration.minutes,
       timerDuration.seconds,
     );
-    isAtZero
-      ? console.log('[isTimerZero] YES')
-      : console.log('[isTimerZero] no');
     return isAtZero;
   }
 

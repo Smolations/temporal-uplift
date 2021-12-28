@@ -1,7 +1,10 @@
 import React from 'react';
 
-import { TemporalUplift } from 'components/TemporalUplift';
 import { Page } from 'components/Page';
+
+import Stopwatch from './Stopwatch';
+import TimeConfiguration from './TimeConfiguration';
+import Timer from './Timer';
 
 import './Home.scss';
 
@@ -10,7 +13,9 @@ export default function Home(props) {
 
   return (
     <Page className="Home">
-      <TemporalUplift />
+      <Stopwatch />
+      <Timer />
+      <TimeConfiguration />
     </Page>
   );
 }

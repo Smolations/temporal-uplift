@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TimerControl } from '../Control';
+import { TimerControl } from 'components/Control';
 
 import './Timer.scss';
 
