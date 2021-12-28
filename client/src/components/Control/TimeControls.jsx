@@ -5,7 +5,6 @@ import { Temporal } from '@js-temporal/polyfill';
 import { Digit } from '../Digit';
 import { Time } from '../Time';
 
-import DigitPairControl from './DigitPairControl';
 import DigitPairControls from './DigitPairControls';
 
 import './TimeControls.scss';
