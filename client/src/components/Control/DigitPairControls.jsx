@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import DigitControls from './DigitControls';
+import DigitControl from './DigitControl';
 
 import './DigitPairControls.scss';
 
@@ -56,20 +56,20 @@ export default function DigitPairControls(props) {
   console.groupEnd();
   return (
     <span className="DigitPairControls">
-      <DigitControls
+      <DigitControl
         max={maxLeadingDigit}
         defaultDigit={0}
         onChange={handleLeadingDigitChange}
       >
         {digits[0]}
-      </DigitControls>
-      <DigitControls
+      </DigitControl>
+      <DigitControl
         max={digits[0] === maxLeadingDigit ? maxTrailingDigit : 9}
         defaultDigit={0}
         onChange={handleTrailingDigitChange}
       >
         {digits[1]}
-      </DigitControls>
+      </DigitControl>
     </span>
   );
 }

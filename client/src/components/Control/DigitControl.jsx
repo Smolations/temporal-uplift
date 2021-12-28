@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { ControlButton } from '../Button';
 import { Digit } from '../Digit';
 
-import './DigitControls.scss';
+import './DigitControl.scss';
 
 
-export default function DigitControls(props) {
+export default function DigitControl(props) {
   const {
     children,
     defaultValue,
@@ -55,7 +55,7 @@ export default function DigitControls(props) {
 
 
   return (
-    <span className="DigitControls">
+    <span className="DigitControl">
       <ControlButton onClick={handleIncrease} />
       <Digit>{isControlled ? children : digit}</Digit>
       <ControlButton onClick={handleDecrease} />
@@ -63,16 +63,16 @@ export default function DigitControls(props) {
   );
 }
 
-DigitControls.displayName = 'DigitControls';
+DigitControl.displayName = 'DigitControl';
 
-DigitControls.propTypes = {
+DigitControl.propTypes = {
   children: PropTypes.number,
   max: PropTypes.number,
   min: PropTypes.number,
   onChange: PropTypes.func,
 };
 
-DigitControls.defaultProps = {
+DigitControl.defaultProps = {
   defaultValue: 0,
   max: 9,
   min: 0,
