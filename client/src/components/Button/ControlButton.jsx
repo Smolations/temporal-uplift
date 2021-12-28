@@ -26,5 +26,5 @@ export default function ControlButton(props) {
 ControlButton.displayName = 'ControlButton';
 
 ControlButton.propTypes = {
-  children: PropTypes.instanceOf(FontAwesomeIcon),
+  children: PropTypes.element,
 };

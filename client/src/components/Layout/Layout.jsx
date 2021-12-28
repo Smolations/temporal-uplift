@@ -28,7 +28,7 @@ export default function Layout(props) {
   } = props;
 
   const [{ theme }] = useGlobalState();
-  const logo = logosByTheme[theme];
+  const logo = logosByTheme[theme];console.log(theme)
   const classes = classNames('Layout', className);
 
   const logoElement = (
