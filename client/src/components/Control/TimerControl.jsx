@@ -6,7 +6,7 @@ import { Button } from '../Button';
 
 import { Time } from '../Time';
 
-import './TimerControls.scss';
+import './TimerControl.scss';
 
 
 // @param {string} time  To start, expect hh:mm:ss format
@@ -25,8 +25,8 @@ function getTimerDuration(time = '00:00:00') {
 }
 
 
-export default function TimerControls() {
-  console.groupCollapsed('[TimerControls]');
+export default function TimerControl() {
+  console.groupCollapsed('[TimerControl]');
   // console.log('Initialization complete', Temporal.Now.instant().toString());
 
   const [timerDuration, setTimerDuration] = useState(getTimerDuration());
@@ -96,7 +96,7 @@ export default function TimerControls() {
 
   console.groupEnd();
   return (
-    <div className="TimerControls">
+    <div className="TimerControl">
       <Time
         hours={roundedTimerDuration?.hours}
         minutes={roundedTimerDuration?.minutes}
@@ -109,6 +109,6 @@ export default function TimerControls() {
   );
 }
 
-TimerControls.displayName = 'TimerControls';
+TimerControl.displayName = 'TimerControl';
 
-TimerControls.propTypes = {};
+TimerControl.propTypes = {};

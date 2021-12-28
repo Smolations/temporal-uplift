@@ -1,11 +1,6 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Temporal } from '@js-temporal/polyfill';
+import React from 'react';
 
-import { Button } from '../Button';
-import { TimerControls } from '../Control';
-
-import { Time } from '../Time';
+import { TimerControl } from '../Control';
 
 import './Timer.scss';
 
@@ -14,7 +9,7 @@ export default function Timer() {
   return (
     <div className="Timer">
       <h6>Timer</h6>
-      <TimerControls />
+      <TimerControl />
     </div>
   );
 }
