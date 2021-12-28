@@ -1,4 +1,3 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const {
@@ -78,24 +77,4 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    // allowedHosts: ['.codesandbox.io'],
-    // client: {
-    //   reconnect: 5,
-    //   webSocketURL: 'auto://0.0.0.0:0/ws',
-    // },
-    // static: {
-    //   directory: './dist', // match output.path
-    // },
-    historyApiFallback: true,
-    // host: '0.0.0.0',
-    // port: 8080, // default
-  },
-  plugins: [
-    // new HtmlWebPackPlugin(),
-    // new HtmlWebPackPlugin({
-    //   title: 'Temporal Uplift',
-    //   template: './src/index.ejs',
-    // }),
-  ],
 };

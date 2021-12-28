@@ -1,4 +1,3 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const {
@@ -33,16 +32,8 @@ module.exports = {
     errorDetails: true,
   },
   entry: './main.js',  // default
-  // output: {
-  //   path: path.resolve(__dirname, 'dist'), // default
-  //   filename: '[name].js',  // default
-  // },
   resolve: {
     extensions: ['.js'],
-    // modules: [
-    //   path.join(__dirname, 'src'),
-    //   'node_modules',
-    // ],
   },
   module: {
     rules: [
