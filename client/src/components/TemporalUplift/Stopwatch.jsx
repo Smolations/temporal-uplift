@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 
 import { Button } from '../Button';
-import { StopwatchControls } from '../Control';
+import { StopwatchControl } from '../Control';
 
 import { Time } from '../Time';
 
@@ -14,7 +14,7 @@ export default function Stopwatch() {
   return (
     <div className="Stopwatch">
       <h6>Stopwatch</h6>
-      <StopwatchControls />
+      <StopwatchControl />
     </div>
   );
 }

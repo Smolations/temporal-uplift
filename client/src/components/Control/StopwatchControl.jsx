@@ -6,7 +6,7 @@ import { Button } from '../Button';
 
 import { Time } from '../Time';
 
-import './StopwatchControls.scss';
+import './StopwatchControl.scss';
 
 
 function getZeroDuration() {
@@ -14,8 +14,8 @@ function getZeroDuration() {
 }
 
 
-export default function StopwatchControls() {
-  console.groupCollapsed('[StopwatchControls]');
+export default function StopwatchControl() {
+  console.groupCollapsed('[StopwatchControl]');
   // console.log('Initialization complete', Temporal.Now.instant().toString());
 
   const [timerDuration, setTimerDuration] = useState(getZeroDuration());
@@ -52,7 +52,7 @@ export default function StopwatchControls() {
 
   console.groupEnd();
   return (
-    <div className="StopwatchControls">
+    <div className="StopwatchControl">
       <Time
         hours={roundedStopwatchDuration?.hours}
         minutes={roundedStopwatchDuration?.minutes}
@@ -65,6 +65,6 @@ export default function StopwatchControls() {
   );
 }
 
-StopwatchControls.displayName = 'StopwatchControls';
+StopwatchControl.displayName = 'StopwatchControl';
 
-StopwatchControls.propTypes = {};
+StopwatchControl.propTypes = {};
