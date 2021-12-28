@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TimeControls } from '../Control';
+import { TimeControl } from '../Control';
 
 import './TimeConfiguration.scss';
 
@@ -14,7 +14,7 @@ export default function TimeConfiguration() {
     <div className="TimeConfiguration">
       <h6>Time Configuration</h6>
       <div className="TimeConfiguration--container">
-        <TimeControls onChange={handleChange} />
+        <TimeControl onChange={handleChange} />
       </div>
     </div>
   )

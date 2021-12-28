@@ -1,12 +1,12 @@
 // import DigitControls from './DigitControls';
 import StopwatchControl from './StopwatchControl';
-import TimeControls from './TimeControls';
+import TimeControl from './TimeControl';
 import TimerControls from './TimerControls';
 
 
 export {
   // DigitControls,
   StopwatchControl,
-  TimeControls,
+  TimeControl,
   TimerControls,
 };

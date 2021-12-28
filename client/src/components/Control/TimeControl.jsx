@@ -7,15 +7,15 @@ import { Time } from '../Time';
 
 import DigitPairControl from './DigitPairControl';
 
-import './TimeControls.scss';
+import './TimeControl.scss';
 
 
 function digitPairFrom(digit) {
   return `${digit}`.padStart(2, '0').split('').slice(0, 2).map(Number);
 }
 
-export default function TimeControls(props) {
-  console.groupCollapsed('[TimeControls]');
+export default function TimeControl(props) {
+  console.groupCollapsed('[TimeControl]');
   const {
     onChange,
     reverse,
@@ -32,14 +32,14 @@ export default function TimeControls(props) {
   const [timeArray, setTimeArray] = useState([3, 2, 1]); // check incoming time?
   console.log('timeArray: %o', timeArray)
 
-  const classes = classNames('TimeControls', {
-    'TimeControls--single': single,
-    'TimeControls--reverse': reverse,
+  const classes = classNames('TimeControl', {
+    'TimeControl--single': single,
+    'TimeControl--reverse': reverse,
   });
 
 
   function handleChange(digits, ndx) {
-    console.groupCollapsed('[TimeControls handleChange]');
+    console.groupCollapsed('[TimeControl handleChange]');
     console.log('digits: %o', digits);
     console.log('ndx: %o', ndx);
 
@@ -78,6 +78,6 @@ export default function TimeControls(props) {
   );
 }
 
-TimeControls.displayName = 'TimeControls';
+TimeControl.displayName = 'TimeControl';
 
-TimeControls.propTypes = {};
+TimeControl.propTypes = {};
