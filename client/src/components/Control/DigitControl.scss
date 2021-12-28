@@ -4,7 +4,7 @@
   align-items: center;
 
   // flip that frown upside down
-  .DigitControl:last-child {
+  .ControlButton:last-child {
     transform: rotate(180deg);
   }
 }

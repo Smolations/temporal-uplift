@@ -1,13 +1,22 @@
+import {
+  faPlay,
+  faStop,
+  faStepBackward,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Temporal } from '@js-temporal/polyfill';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Temporal } from '@js-temporal/polyfill';
 
-import { Button } from '../Button';
-
+import { ControlButton } from '../Button';
 import { Time } from '../Time';
 
 import './TimerControl.scss';
 
+
+const startIcon = (<FontAwesomeIcon icon={faPlay} />);
+const stopIcon = (<FontAwesomeIcon icon={faStop} />);
+const resetIcon = (<FontAwesomeIcon icon={faStepBackward} />);
 
 // @param {string} time  To start, expect hh:mm:ss format
 function getTimerDuration(time = '00:00:00') {
@@ -102,9 +111,15 @@ export default function TimerControl() {
         minutes={roundedTimerDuration?.minutes}
         seconds={roundedTimerDuration?.seconds}
       />
-      <Button onClick={handleStartTimer}>Start</Button>
-      <Button onClick={handleStopTimer}>Stop</Button>
-      <Button onClick={handleResetTimer}>Reset</Button>
+      <ControlButton onClick={handleStartTimer}>
+        {startIcon}
+      </ControlButton>
+      <ControlButton onClick={handleStopTimer}>
+        {stopIcon}
+      </ControlButton>
+      <ControlButton onClick={handleResetTimer}>
+        {resetIcon}
+      </ControlButton>
     </div>
   );
 }

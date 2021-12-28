@@ -1,3 +1,5 @@
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -5,6 +7,9 @@ import { ControlButton } from '../Button';
 import { Digit } from '../Digit';
 
 import './DigitControl.scss';
+
+
+const buttonIcon = (<FontAwesomeIcon icon={faCaretUp} />);
 
 
 export default function DigitControl(props) {
@@ -56,9 +61,17 @@ export default function DigitControl(props) {
 
   return (
     <span className="DigitControl">
-      <ControlButton onClick={handleIncrease} />
-      <Digit>{isControlled ? children : digit}</Digit>
-      <ControlButton onClick={handleDecrease} />
+      <ControlButton onClick={handleIncrease}>
+        {buttonIcon}
+      </ControlButton>
+
+      <Digit>
+        {isControlled ? children : digit}
+      </Digit>
+
+      <ControlButton onClick={handleDecrease}>
+        {buttonIcon}
+      </ControlButton>
     </span>
   );
 }

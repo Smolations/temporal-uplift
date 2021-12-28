@@ -3,4 +3,8 @@
 .StopwatchControl {
   display: flex;
   align-items: center;
+
+  .Time {
+    margin-right: auto;
+  }
 }

@@ -1,22 +1,30 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import React from 'react';
+
+import Button from './Button';
 
 import './ControlButton.scss';
 
 
 export default function ControlButton(props) {
-  const { onClick } = props;
+  const {
+    children,
+    onClick,
+  } = props;
 
   return (
-    <button
+    <Button
       className="ControlButton"
-      type="button"
       onClick={onClick}
     >
-      ↑
-    </button>
+      {children}
+    </Button>
   );
 }
 
 ControlButton.displayName = 'ControlButton';
 
-ControlButton.propTypes = {};
+ControlButton.propTypes = {
+  children: PropTypes.instanceOf(FontAwesomeIcon),
+};

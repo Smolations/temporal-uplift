@@ -1,12 +1,22 @@
+import {
+  faPlay,
+  faStop,
+  faStepBackward,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 
-import { Button } from '../Button';
-
+import { ControlButton } from '../Button';
 import { Time } from '../Time';
 
 import './StopwatchControl.scss';
+
+
+const startIcon = (<FontAwesomeIcon icon={faPlay} />);
+const stopIcon = (<FontAwesomeIcon icon={faStop} />);
+const resetIcon = (<FontAwesomeIcon icon={faStepBackward} />);
 
 
 function getZeroDuration() {
@@ -58,9 +68,15 @@ export default function StopwatchControl() {
         minutes={roundedStopwatchDuration?.minutes}
         seconds={roundedStopwatchDuration?.seconds}
       />
-      <Button onClick={handleStartStopwatch}>Start</Button>
-      <Button onClick={handleStopStopwatch}>Stop</Button>
-      <Button onClick={handleResetStopwatch}>Reset</Button>
+      <ControlButton onClick={handleStartStopwatch}>
+        {startIcon}
+      </ControlButton>
+      <ControlButton onClick={handleStopStopwatch}>
+        {stopIcon}
+      </ControlButton>
+      <ControlButton onClick={handleResetStopwatch}>
+        {resetIcon}
+      </ControlButton>
     </div>
   );
 }
