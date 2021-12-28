@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
+import { ControlButton } from '../Button';
 import { Digit } from '../Digit';
-
-import DigitControl from './DigitControl';
 
 import './DigitControls.scss';
 
@@ -57,9 +56,9 @@ export default function DigitControls(props) {
 
   return (
     <span className="DigitControls">
-      <DigitControl onClick={handleIncrease} />
+      <ControlButton onClick={handleIncrease} />
       <Digit>{isControlled ? children : digit}</Digit>
-      <DigitControl onClick={handleDecrease} />
+      <ControlButton onClick={handleDecrease} />
     </span>
   );
 }

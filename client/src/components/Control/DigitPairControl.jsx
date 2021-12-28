@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DigitControl from './DigitControl';
+import { ControlButton } from '../Button';
 
 import './DigitPairControl.scss';
 
@@ -11,8 +11,8 @@ export default function DigitPairControl(props) {
 
   return (
     <span className="DigitPairControl">
-      <DigitControl />
-      <DigitControl />
+      <ControlButton />
+      <ControlButton />
     </span>
   );
 }
