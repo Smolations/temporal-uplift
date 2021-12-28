@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-ENV APT_PACKAGES="curl procps" \
+ENV APT_PACKAGES="curl procps git" \
     NPM_PACKAGES="nodemon"
 
 RUN apt update -y && \

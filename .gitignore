@@ -1,6 +1,7 @@
-node_modules
 .env
+.webpack
 dist
+node_modules
 
 # client
 
