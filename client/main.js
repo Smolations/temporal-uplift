@@ -1,14 +1,16 @@
 const { app, BrowserWindow } = require('electron');
 
-
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    width: 1500,
+    height: 1000,
     webPreferences: {
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      preload: MAIN_PRELOAD_WEBPACK_ENTRY,
     }
   });
 
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  mainWindow.webContents.openDevTools();
+  mainWindow.loadURL(MAIN_WEBPACK_ENTRY);
 }
 
 

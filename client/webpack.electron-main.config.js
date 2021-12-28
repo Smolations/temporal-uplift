@@ -77,34 +77,14 @@ module.exports = {
           esModule: false,
         },
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
+      // {
+      //   test: /\.html$/,
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //     },
+      //   ],
+      // },
     ],
   },
-  devServer: {
-    // allowedHosts: ['.codesandbox.io'],
-    // client: {
-    //   reconnect: 5,
-    //   webSocketURL: 'auto://0.0.0.0:0/ws',
-    // },
-    // static: {
-    //   directory: './dist', // match output.path
-    // },
-    historyApiFallback: true,
-    host: '0.0.0.0',
-    // port: 8080, // default
-  },
-  plugins: [
-    // new HtmlWebPackPlugin(),
-    new HtmlWebPackPlugin({
-      title: 'Temporal Uplift',
-      template: './src/index.ejs',
-    }),
-  ],
 };

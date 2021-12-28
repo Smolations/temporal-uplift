@@ -89,9 +89,8 @@
               "config": "./webpack.electron-renderer.config.js",
               "entryPoints": [
                 {
-                  "name": "main_window",
-                  "html": "./src/index.ejs",
-                  "js": "./src/index.js"
+                  "name": "main",
+                  "html": "./src/index.ejs"
                 }
               ]
             }

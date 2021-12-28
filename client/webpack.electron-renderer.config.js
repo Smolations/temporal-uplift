@@ -17,8 +17,6 @@ const babelLoader = {
 };
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   watchOptions: {
     aggregateTimeout: 200, // default: 200
     poll: 1000, // default: 1000
@@ -26,17 +24,9 @@ module.exports = {
   stats: {
     errorDetails: true,
   },
-  entry: './src/index.js',  // default
-  // output: {
-  //   path: path.resolve(__dirname, 'dist'), // default
-  //   filename: '[name].js',  // default
-  // },
+  entry: './src/index.js',  // required for electron-forge; match package.json
   resolve: {
     extensions: ['.js', '.jsx'],
-    // modules: [
-    //   path.join(__dirname, 'src'),
-    //   'node_modules',
-    // ],
     alias: {
       components: path.join(srcPath, 'components'),
       hooks: path.join(srcPath, 'hooks'),

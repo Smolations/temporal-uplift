@@ -17,7 +17,7 @@ export const routes = [
       {
         name: 'Home',
         index: true,
-        path: '/',
+        path: '/main',
         element: <Home />,
       },
       {
