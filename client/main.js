@@ -8,6 +8,9 @@ const path = require('path');
 
 
 const isMac = process.platform === 'darwin';
+const logoPath = '/Users/Smola/projects/temporal-uplift/client/src/logo_64x64.png';
+console.log('logoPath: ', logoPath)
+
 
 // https://www.electronjs.org/docs/latest/api/menu-item
 const template = [
@@ -124,8 +127,11 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1500,
     height: 1000,
+    icon: logoPath,
     webPreferences: {
       preload: MAIN_PRELOAD_WEBPACK_ENTRY,
+      zoomFactor: 3.0,
+      defaultEncoding: 'UTF-8', // default: 'ISO-8859-1'
     }
   });
 
@@ -143,7 +149,7 @@ app.setAboutPanelOptions({
   // credits: '', // mac/windows
   // authors: 'Chris Smola', // linux
   // website: 'https://github.com/Smolations/temporal-uplift', // linux
-  iconPath: path.resolve(__dirname, 'src/logo.png'), // linux/windows; not working?
+  iconPath: logoPath, // linux/windows; not working?
 });
 
 app.whenReady().then(() => {

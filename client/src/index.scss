@@ -5,6 +5,7 @@
 /* box-sizing simple reset */
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 
 *, *::before, *::after {
@@ -20,3 +21,7 @@ body {
   font-family: vars.$font-family-sans;
   font-size: vars.$font-size-base;
 };
+
+#root {
+  height: 100%;
+}
