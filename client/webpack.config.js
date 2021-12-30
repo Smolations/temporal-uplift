@@ -40,9 +40,9 @@ module.exports = {
     alias: {
       components: path.join(srcPath, 'components'),
       hooks: path.join(srcPath, 'hooks'),
-      pages: path.join(srcPath, 'pages'),
       sass: path.join(srcPath, 'sass'),
       state: path.join(srcPath, 'state'),
+      views: path.join(srcPath, 'views'),
     },
   },
   module: {

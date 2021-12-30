@@ -1,21 +1,24 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-import { useGlobalState } from 'state/global';
+import { globalStateActions, useGlobalState } from 'state/global';
 import themes from '../../sass/modules/theme.module.scss';
 
 
 export default function Theme(props) {
-  const [{ theme }] = useGlobalState(); // @todo replace with new theme provider?
+  const [{ theme }, dispatch] = useGlobalState(); // @todo replace with new theme provider?
 
   useEffect(() => {
     const body = document.querySelector('body');
+    const existingClass = body.className;
     const themeClass = themes[theme] || '';
+    const classes = classNames('Theme', `Themes--${theme}`, existingClass, themeClass);
 
-    if (body && themeClass) {
-      body.classList.add(themeClass);
-      return () => body.classList.remove(themeClass);
-    }
+    body.className = classes;
+    dispatch(globalStateActions.setThemeClass(themeClass));
+
+    return () => body.className = classes;
   }, [theme]);
 
   return props.children;

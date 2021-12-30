@@ -1,4 +1,5 @@
 // base tokens first
+@forward 'box-shadow' as box-shadow-*;
 @forward 'color' as color-*;
 @forward 'font' as font-*;
 @forward 'spacing' as spacing-*;

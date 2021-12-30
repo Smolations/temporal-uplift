@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom';
 import { Layout } from 'components/Layout';
 
 import { Home } from './home';
-import { Theming } from './theming';
+import { Testies } from './testies';
 
 
 // configure in such a way that menus can be nested
@@ -12,19 +12,21 @@ import { Theming } from './theming';
 // route metadata: nav, name
 export const routes = [
   {
+    path: '/main',
+    // index: true,
     element: <Layout />,
     children: [
       {
         name: 'Home',
         index: true,
-        path: '/main',
+        // path: '/main',
         element: <Home />,
       },
       {
         nav: false,
-        name: 'Theming',
-        path: '/theming',
-        element: <Theming />,
+        name: 'Testies',
+        path: 'testies',
+        element: <Testies />,
       },
     ],
   },

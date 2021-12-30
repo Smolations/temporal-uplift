@@ -5,6 +5,8 @@
 
   // flip that frown upside down
   .ControlButton:last-child {
-    transform: rotate(180deg);
+    > [data-icon] {
+      transform: rotate(180deg);
+    }
   }
 }

@@ -4,20 +4,22 @@ import React from 'react';
 
 import { Header } from '../Header';
 
-import './Page.scss';
+import './View.scss';
 
 
 /**
- * A generic page wrapper, ensuring all pages follow the same layout.
+ * A generic view wrapper, ensuring all views follow the same layout.
+ *
+ * may be redundant to Layout?
  */
-export default function Page(props) {
+export default function View(props) {
   const {
     children,
     className,
     heading,
   } = props;
 
-  const classes = classNames('Page', className);
+  const classes = classNames('View', className);
 
   return (
     <div className={classes}>
@@ -27,9 +29,9 @@ export default function Page(props) {
   );
 }
 
-Page.displayName = 'Page';
+View.displayName = 'View';
 
-Page.propTypes = {
+View.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   heading: PropTypes.string,

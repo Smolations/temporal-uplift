@@ -1,21 +1,20 @@
 import React from 'react';
 
-import { Page } from 'components/Page';
+import { View } from 'components/View';
 
 import Stopwatch from './Stopwatch';
 import TimeConfiguration from './TimeConfiguration';
 import Timer from './Timer';
 
-import './Home.scss';
+import './Testies.scss';
 
 
-export default function Home(props) {
-
+export default function Testies(props) {
   return (
-    <Page className="Home">
+    <View className="Testies">
       <Stopwatch />
       <Timer />
       <TimeConfiguration />
-    </Page>
+    </View>
   );
 }

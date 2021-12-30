@@ -1,4 +1,4 @@
 export default {
-  CHANGE_FOO: 'change-foo',
   SET_THEME: 'set-theme',
+  SET_THEME_CLASS: 'set-theme-class',
 };

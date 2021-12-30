@@ -1,0 +1,14 @@
+@use 'sass/vars';
+
+.Surface {
+  margin: vars.$spacing-margin-normal;
+  padding: vars.$spacing-padding-normal;
+
+  background-color: vars.$theme-surface;
+  box-shadow: vars.$box-shadow-low;
+  color: vars.$theme-on-surface;
+
+  .Themes--dark & {
+    box-shadow: vars.$box-shadow-medium-inset;
+  }
+}

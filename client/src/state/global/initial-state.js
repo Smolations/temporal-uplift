@@ -1,4 +1,4 @@
 export default {
-  foo: 'bar',
-  theme: 'orange',
+  themeClass: '',
+  theme: 'dark',
 };

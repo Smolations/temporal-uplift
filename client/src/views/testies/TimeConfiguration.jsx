@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { TimeControl } from 'components/Control';
+import { Surface } from 'components/Surface';
 
 import './TimeConfiguration.scss';
 
@@ -11,12 +12,12 @@ export default function TimeConfiguration() {
   }
 
   return (
-    <div className="TimeConfiguration">
+    <Surface className="TimeConfiguration">
       <h6>Time Configuration</h6>
       <div className="TimeConfiguration--container">
         <TimeControl onChange={handleChange} />
       </div>
-    </div>
+    </Surface>
   )
 }
 

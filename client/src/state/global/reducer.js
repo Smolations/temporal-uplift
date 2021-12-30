@@ -5,21 +5,21 @@ export default function reducer(state, action) {
   let newState;
 
   switch (type) {
-    case types.CHANGE_FOO: {
-      const newValue = payload;
+    case types.SET_THEME: {
+      const theme = payload;
 
       newState = {
         ...state,
-        foo: newValue,
+        theme,
       };
     } break;
 
-    case types.SET_THEME: {
-      const newTheme = payload;
+    case types.SET_THEME_CLASS: {
+      const themeClass = payload;
 
       newState = {
         ...state,
-        theme: newTheme,
+        themeClass,
       };
     } break;
 
