@@ -21,4 +21,8 @@
   + .Button {
     margin-left: vars.$spacing-margin-small;
   }
+
+  .Themes--dark & {
+    background-color: vars.$theme-secondary;
+  }
 }

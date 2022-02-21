@@ -9,6 +9,7 @@ import { GlobalStateProvider } from 'state/global';
 import './App.scss';
 
 // implement the Temporal polyfill (normally near an entry file)
+// only needed to pass Date objects to temporal instances?
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 

@@ -1,13 +1,41 @@
 @use 'sass/vars';
 
+$nav-height: 20px;
+$nav-vertical-padding: 4px;
+$nav-link-content-height: $nav-height - (2 * $nav-vertical-padding);
+
 .Nav {
-  .Nav--list {
-    display: flex;
-    margin: 0;
+  position: relative;
+  display: flex;
+  height: $nav-height;
+  outline: 1px dotted green;
+  -webkit-app-region: drag;
+
+  .Nav--logo {
+    height: 100%;
+    padding: $nav-vertical-padding;
+    object-fit: contain;
   }
 
-  .Link {
-    padding: 0 vars.$spacing-padding-small;
-    text-decoration: none;
+  nav {
+    position: relative;
+    max-height: $nav-height;
+
+    .Nav--list {
+      display: flex;
+      margin: 0;
+
+      li {
+        > .Link {
+          display: block;
+          padding: $nav-vertical-padding vars.$spacing-padding-small;
+          font-size: $nav-link-content-height;
+          line-height: $nav-link-content-height;
+          text-decoration: none;
+          -webkit-app-region: no-drag;
+        }
+      }
+    }
   }
+
 }

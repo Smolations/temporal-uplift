@@ -5,6 +5,8 @@ import { Outlet } from 'react-router-dom';
 
 import { useGlobalState } from 'state/global';
 
+import { Nav } from '../Nav';
+
 import themeDarkLogo from './theme-dark-logo.png';
 import themeLightLogo from './theme-light-logo.png';
 import themeOrangeLogo from './theme-orange-logo.png';
@@ -15,7 +17,7 @@ import './Layout.scss';
 const logosByTheme = {
   light: themeLightLogo,
   dark: themeDarkLogo,
-  orange: themeOrangeLogo
+  orange: themeOrangeLogo,
 };
 
 export default function Layout(props) {
@@ -29,6 +31,7 @@ export default function Layout(props) {
 
   return (
     <div className={classes}>
+      <Nav />
       <main className="Layout--view-container">
         <Outlet />
       </main>

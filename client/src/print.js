@@ -59,3 +59,105 @@ newPlainTime.second  // 3
 // PLURAL
 // Duration
 // Instant* (though only up to epochSeconds)
+
+
+/*********************************
+ * https://medium.com/folkdevelopers/the-ultimate-guide-to-electron-with-react-8df8d73f4c97
+ *********************************/
+
+// If a parent property is defined on a BrowserWindow, then that
+// BrowserWindow becomes a child window to the BrowserWindow
+// that has been assigned as its parent window. A child window always
+// stays on top of the parent window.
+function createWindow() {
+  let heyparent = new BrowserWindow();
+  let heychild = new BrowserWindow({ parent: heyparent });
+  heychild.show();
+  heyparent.show();
+}
+
+
+// How to disable a parent window when a child window pops up?
+// That’s exactly what a modal window does. To create a modal window,
+// you need to set both the parent and modal properties.
+// Electron loads the child with a slight delay. So, the recommended way
+// is to set the `show` property to false.
+// Now as soon as the child window gets rendered, show it by running
+// the show function. But, how to detect when a page finishes getting
+// rendered? As soon as a webpage renders, the ready-to-show event is
+// fired.
+const parent = new BrowserWindow();
+
+// recommended
+const child = new BrowserWindow({
+  parent: parent,
+  modal: true,
+  show: false
+});
+
+child.loadURL('https://github.com');
+
+//show as soon as the file is rendered
+child.once('ready-to-show', () => { child.show(); });
+
+
+
+//// FIRE UP A WINDOW ON CLICK ////
+import React from 'react';
+const electron = window.require('electron');
+const remote = electron.remote;
+const { BrowserWindow } = remote;
+
+
+export default function App() {
+  return (
+    <button onClick={() => {
+      const win = new BrowserWindow();
+      win.loadURL('https://www.electronjs.org/docs/api/remote');
+    }}>
+      Open BrowserWindow
+    </button>
+  );
+
+}
+
+
+
+//// SHOW OPEN FILE DIALOG ////
+
+import React from 'react';
+const electron = window.require('electron');
+const { shell } = window.require('electron');
+const remote = electron.remote;
+const { dialog } = remote;
+
+export default function App() {
+  return (
+    <button onClick={() => {
+      dialog.showOpenDialog(
+        {
+          title: 'Open Dialogue',
+          message: 'First Dialog',
+          //pass 'openDirectory' to strictly open directories
+          properties: ['openFile'],
+          filters: [
+            { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+            { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
+            { name: 'Custom File Type', extensions: ['as'] },
+            { name: 'All Files', extensions: ['*'] }
+          ],
+        }
+      ).then(result => {
+        shell.openPath(result.filePaths[0]); // e.g. open file natively
+        console.log(result.filePaths[0]);
+      });
+    }}>
+      Open Dialog to Select a file
+    </button>
+  );
+};
+
+
+// ipcMain/ipcRenderer act using a channel/listener setup, similar (perhaps)
+// to how a parent page would communicate to an iframe. not sure in
+// what situations this would be of use...yet.

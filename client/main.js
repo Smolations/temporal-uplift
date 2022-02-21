@@ -109,7 +109,7 @@ const template = [
         label: 'Learn More',
         click: async () => {
           const { shell } = require('electron');
-          await shell.openExternal('https://electronjs.org');
+          await shell.openExternal('https://github.com/Smolations/temporal-uplift');
         }
       }
     ]
@@ -125,15 +125,33 @@ const menu = Menu.buildFromTemplate(template);
 // ALSO, type "rs" in console to manually reload app
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
+    titleBarOverlay: { // need to manage these manually probably?
+      color: '#1b1b1b',
+      symbolColor: '#a5d6a7'
+    },
     width: 1500,
     height: 1000,
+    maximizable: false,
     icon: logoPath,
     webPreferences: {
+      // nodeIntegration: true, // why?
+      enableRemoteModule: true, // access to main.js stuffs in renderer
       preload: MAIN_PRELOAD_WEBPACK_ENTRY,
       zoomFactor: 3.0,
       defaultEncoding: 'UTF-8', // default: 'ISO-8859-1'
+      // maxHeight: 600,
+      // maxWidth: 600,
+      // minHeight: 400,
+      // minWidth: 400,
     }
   });
+
+  // import React from 'react';
+  // // how to import the remote module in a React component?
+  // const electron = window.require('electron');
+  // const remote = electron.remote;
+  // const { BrowserWindow, dialog, Menu } = remote
 
   mainWindow.webContents.openDevTools();
   mainWindow.loadURL(MAIN_WEBPACK_ENTRY);
@@ -152,6 +170,27 @@ app.setAboutPanelOptions({
   iconPath: logoPath, // linux/windows; not working?
 });
 
+
 app.whenReady().then(() => {
   createWindow();
 });
+
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', () => {
+  if (!isMac) {
+    app.quit();
+  }
+});
+
+
+app.on('activate', () => {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+})

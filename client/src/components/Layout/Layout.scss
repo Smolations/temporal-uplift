@@ -13,6 +13,10 @@ $page-width:  500px;
   background-color: vars.$theme-background;
   overflow: auto;
 
+  .Nav {
+    flex-grow: 0;
+  }
+
   .Layout--view-container {
     flex-grow: 1;
   }
